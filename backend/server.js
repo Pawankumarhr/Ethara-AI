@@ -87,13 +87,11 @@ app.get("/api/dashboard", protect, async (req, res) => {
   }
 });
 
-// Serve static frontend files from dist directory
-const frontendPath = path.join(__dirname, "../frontend/dist");
-app.use(express.static(frontendPath));
-
-// SPA fallback - serve index.html for all non-API routes
-app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
+// Root route for Railway backend
+app.get("/", (req, res) => {
+  res.json({
+    message: "Ethara AI Backend Running Successfully",
+  });
 });
 
 app.use((err, req, res, next) => {
