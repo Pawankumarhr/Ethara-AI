@@ -1,0 +1,42 @@
+{
+  "name": "Ethara AI - Team Task Manager",
+  "description": "Full-stack team collaboration and task management application",
+  "builder": "nixpacks",
+  "buildCommand": "cd backend && npm install && npm run build",
+  "startCommand": "cd backend && npm start",
+  "env": {
+    "NODE_ENV": {
+      "description": "Node environment (production)",
+      "value": "production"
+    },
+    "PORT": {
+      "description": "Server port",
+      "value": "3000"
+    },
+    "DATABASE_URL": {
+      "description": "Supabase PostgreSQL connection string. Get from: https://supabase.com → Project Settings → Database",
+      "required": true
+    },
+    "JWT_SECRET": {
+      "description": "JWT secret key (min 32 chars). Generate: openssl rand -base64 32",
+      "required": true
+    },
+    "CORS_ORIGIN": {
+      "description": "CORS origin (your Railway app URL). Example: https://ethara-ai-prod.railway.app",
+      "required": false,
+      "value": "*"
+    }
+  },
+  "volumes": [],
+  "services": [
+    {
+      "type": "web",
+      "name": "api",
+      "port": 3000
+    }
+  ],
+  "deploy": {
+    "restartPolicyType": "on_failure",
+    "restartPolicyMaxRetries": 10
+  }
+}

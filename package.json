@@ -1,0 +1,17 @@
+{
+  "name": "ethara-ai",
+  "version": "1.0.0",
+  "description": "Ethara AI - Team Task Manager",
+  "type": "module",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build && cd ../backend",
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "migrate": "cd backend && npx prisma migrate deploy && npm run prisma:seed",
+    "seed": "cd backend && npm run prisma:seed"
+  },
+  "keywords": ["task-manager", "team", "collaboration"],
+  "author": "Ethara AI",
+  "license": "MIT"
+}
