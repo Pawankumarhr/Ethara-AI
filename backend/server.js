@@ -92,12 +92,8 @@ const frontendPath = path.join(__dirname, "../frontend/dist");
 app.use(express.static(frontendPath));
 
 // SPA fallback - serve index.html for all non-API routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
-
 app.use((req, res) => {
-  res.status(404).json({ message: `Route not found: ${req.originalUrl}` });
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 app.use((err, req, res, next) => {
@@ -116,5 +112,4 @@ connectDB().then(() => {
 }).catch(error => {
   console.error("Failed to start server:", error.message);
   process.exit(1);
-});
 });

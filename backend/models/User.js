@@ -40,7 +40,6 @@ const userSchema = new mongoose.Schema({
 });
 
 // Indexes for performance
-userSchema.index({ email: 1 });
 userSchema.index({ created_at: 1 });
 userSchema.index({ last_login: 1 });
 

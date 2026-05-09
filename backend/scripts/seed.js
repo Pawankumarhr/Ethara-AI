@@ -1,5 +1,8 @@
 import bcryptjs from 'bcryptjs';
+import dotenv from 'dotenv';
 import { connectDB, disconnectDB, User, Project, Task } from '../config/db.js';
+
+dotenv.config();
 
 async function seedDatabase() {
   try {

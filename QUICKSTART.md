@@ -4,7 +4,7 @@
 
 **MongoDB Atlas Connection String:**
 ```
-mongodb+srv://pawannonmedical_db_user:upioHPP1FPEAdYE0@pk.lkfxvzj.mongodb.net/ethara-ai?retryWrites=true&w=majority
+mongodb+srv://pawannonmedical_db_user:Pawan12345@pk.lkfxvzj.mongodb.net/ethara-ai?retryWrites=true&w=majority
 ```
 
 **Status:** ✅ Connection configured in `backend/.env`
@@ -49,7 +49,7 @@ npm run setup-db
 
 ```bash
 # Connect to MongoDB
-mongosh "mongodb+srv://pawannonmedical_db_user:upioHPP1FPEAdYE0@pk.lkfxvzj.mongodb.net/ethara-ai?retryWrites=true&w=majority"
+mongosh "mongodb+srv://pawannonmedical_db_user:Pawan12345@pk.lkfxvzj.mongodb.net/ethara-ai?retryWrites=true&w=majority"
 
 # Select database
 use ethara-ai

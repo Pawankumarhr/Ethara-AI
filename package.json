@@ -11,7 +11,14 @@
     "migrate": "cd backend && npx prisma migrate deploy && npm run prisma:seed",
     "seed": "cd backend && npm run prisma:seed"
   },
-  "keywords": ["task-manager", "team", "collaboration"],
+  "keywords": [
+    "task-manager",
+    "team",
+    "collaboration"
+  ],
   "author": "Ethara AI",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "^9.6.2"
+  }
 }
