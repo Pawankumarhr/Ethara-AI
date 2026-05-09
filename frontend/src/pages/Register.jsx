@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 const Register = () => {
   const { register, loading } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", email: "", password: "", role: "MEMBER" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", role: "Member" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,8 +49,8 @@ const Register = () => {
             value={form.role}
             onChange={(e) => setForm((prev) => ({ ...prev, role: e.target.value }))}
           >
-            <option value="MEMBER">Member</option>
-            <option value="ADMIN">Admin</option>
+            <option value="Member">Member</option>
+            <option value="Admin">Admin</option>
           </select>
         </div>
 

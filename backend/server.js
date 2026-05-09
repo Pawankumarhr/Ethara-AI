@@ -37,8 +37,8 @@ app.get("/api/dashboard", protect, async (req, res) => {
     let projectFilter = {};
     let taskFilter = {};
 
-    if (req.user.role !== "ADMIN") {
-      const projects = await Project.find({ "members.user_id": req.user.id });
+    if (req.user.role !== "Admin") {
+      const projects = await Project.find({ "Members.user_id": req.user.id });
       const projectIds = projects.map(p => p._id);
       projectFilter = { _id: { $in: projectIds.length ? projectIds : [] } };
       taskFilter = { assigned_to: req.user.id };

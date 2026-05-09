@@ -32,7 +32,7 @@ db.createCollection("users", {
         },
         role: {
           bsonType: "string",
-          enum: ["ADMIN", "MEMBER"],
+          enum: ["Admin", "Member"],
           description: "User role"
         },
         signup_timestamp: {
@@ -85,9 +85,9 @@ db.createCollection("projects", {
           bsonType: "objectId",
           description: "User ID of creator (reference to users)"
         },
-        members: {
+        Members: {
           bsonType: "array",
-          description: "Array of project members",
+          description: "Array of project Members",
           items: {
             bsonType: "object",
             required: ["user_id"],
@@ -98,7 +98,7 @@ db.createCollection("projects", {
               },
               joined_at: {
                 bsonType: "date",
-                description: "When member joined"
+                description: "When Member joined"
               }
             }
           }
@@ -119,7 +119,7 @@ db.createCollection("projects", {
 // Create indexes for projects
 db.projects.createIndex({ created_by: 1 });
 db.projects.createIndex({ created_at: 1 });
-db.projects.createIndex({ "members.user_id": 1 });
+db.projects.createIndex({ "Members.user_id": 1 });
 
 print("✓ projects collection created with indexes");
 
@@ -197,5 +197,5 @@ db.getCollectionNames().forEach(name => {
 
 print("\nIndexes created:");
 print("  users: email (unique), created_at, last_login");
-print("  projects: created_by, created_at, members.user_id");
+print("  projects: created_by, created_at, Members.user_id");
 print("  tasks: project_id, assigned_to, status, due_date, created_at");

@@ -14,7 +14,7 @@ const projectSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  members: [
+  Members: [
     {
       user_id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,7 +40,7 @@ const projectSchema = new mongoose.Schema({
 // Indexes for performance
 projectSchema.index({ created_by: 1 });
 projectSchema.index({ created_at: 1 });
-projectSchema.index({ 'members.user_id': 1 });
+projectSchema.index({ 'Members.user_id': 1 });
 
 // Pre-save middleware
 projectSchema.pre('save', function (next) {

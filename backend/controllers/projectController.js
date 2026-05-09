@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import { Project, User } from "../config/db.js";
 
 const canAccessProject = async (projectId, user) => {
-  if (user.role === "ADMIN") return true;
+  if (user.role === "Admin") return true;
 
   const project = await Project.findById(projectId);
   if (!project) return false;
 
-  return project.members.some(m => m.user_id.toString() === user.id.toString());
+  return project.Members.some(m => m.user_id.toString() === user.id.toString());
 };
 
 export const createProject = async (req, res) => {
@@ -22,12 +22,12 @@ export const createProject = async (req, res) => {
       title,
       description,
       created_by: req.user.id,
-      members: [{ user_id: req.user.id }],
+      Members: [{ user_id: req.user.id }],
     });
 
     const populated = await project.populate([
       { path: "created_by", select: "id name email" },
-      { path: "members.user_id", select: "id name email role" },
+      { path: "Members.user_id", select: "id name email role" },
     ]);
 
     return res.status(201).json({
@@ -36,7 +36,7 @@ export const createProject = async (req, res) => {
       description: populated.description,
       created_by: populated.created_by._id,
       creator: populated.created_by,
-      members: populated.members,
+      Members: populated.Members,
       created_at: populated.created_at,
       updated_at: populated.updated_at,
     });
@@ -68,22 +68,22 @@ export const addProjectMember = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const memberExists = project.members.some(m => m.user_id.toString() === userId.toString());
-    if (memberExists) {
-      return res.status(400).json({ message: "User is already a member" });
+    const MemberExists = project.Members.some(m => m.user_id.toString() === userId.toString());
+    if (MemberExists) {
+      return res.status(400).json({ message: "User is already a Member" });
     }
 
-    project.members.push({ user_id: new mongoose.Types.ObjectId(userId) });
+    project.Members.push({ user_id: new mongoose.Types.ObjectId(userId) });
     await project.save();
 
-    const updated = await project.populate({ path: "members.user_id", select: "id name email role" });
+    const updated = await project.populate({ path: "Members.user_id", select: "id name email role" });
 
     return res.status(201).json({
       user_id: userId,
-      joined_at: updated.members.find(m => m.user_id._id.toString() === userId.toString()).joined_at,
+      joined_at: updated.Members.find(m => m.user_id._id.toString() === userId.toString()).joined_at,
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to add project member" });
+    return res.status(500).json({ message: "Failed to add project Member" });
   }
 };
 
@@ -91,18 +91,18 @@ export const getProjects = async (req, res) => {
   try {
     let projects;
 
-    if (req.user.role === "ADMIN") {
+    if (req.user.role === "Admin") {
       projects = await Project.find()
         .populate("created_by", "id name email")
-        .populate("members.user_id", "id name email role")
+        .populate("Members.user_id", "id name email role")
         .sort({ created_at: -1 })
         .lean();
     } else {
       projects = await Project.find({
-        "members.user_id": req.user.id,
+        "Members.user_id": req.user.id,
       })
         .populate("created_by", "id name email")
-        .populate("members.user_id", "id name email role")
+        .populate("Members.user_id", "id name email role")
         .sort({ created_at: -1 })
         .lean();
     }
@@ -113,7 +113,7 @@ export const getProjects = async (req, res) => {
       description: p.description,
       created_by: p.created_by._id,
       creator: p.created_by,
-      members: p.members,
+      Members: p.Members,
       tasks: [],
       created_at: p.created_at,
       updated_at: p.updated_at,
@@ -135,7 +135,7 @@ export const getProjectById = async (req, res) => {
 
     const project = await Project.findById(projectId)
       .populate("created_by", "id name email")
-      .populate("members.user_id", "id name email role")
+      .populate("Members.user_id", "id name email role")
       .lean();
 
     if (!project) {
@@ -153,7 +153,7 @@ export const getProjectById = async (req, res) => {
       description: project.description,
       created_by: project.created_by._id,
       creator: project.created_by,
-      members: project.members,
+      Members: project.Members,
       tasks: [],
       created_at: project.created_at,
       updated_at: project.updated_at,

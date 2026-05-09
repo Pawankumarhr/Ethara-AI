@@ -43,13 +43,13 @@ async function setupMongoDB() {
       
       await db.collection('projects').createIndex({ created_by: 1 });
       await db.collection('projects').createIndex({ created_at: 1 });
-      await db.collection('projects').createIndex({ 'members.user_id': 1 });
+      await db.collection('projects').createIndex({ 'Members.user_id': 1 });
       console.log('✓ Created projects indexes');
     } else {
       // Ensure indexes exist on existing collection
       await db.collection('projects').createIndex({ created_by: 1 });
       await db.collection('projects').createIndex({ created_at: 1 });
-      await db.collection('projects').createIndex({ 'members.user_id': 1 });
+      await db.collection('projects').createIndex({ 'Members.user_id': 1 });
       console.log('✓ Verified projects indexes');
     }
 

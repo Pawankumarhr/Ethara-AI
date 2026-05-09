@@ -55,7 +55,7 @@ const Tasks = () => {
           task={task}
           onStatusChange={updateStatus}
           onDelete={deleteTask}
-          canDelete={user?.role === "ADMIN"}
+          canDelete={user?.role === "Admin"}
         />
       ))}
 

@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.use(protect);
 
-router.post("/", requireRole("ADMIN"), createTask);
+router.post("/", requireRole("Admin"), createTask);
 router.get("/", getTasks);
 router.put("/:id", updateTask);
-router.delete("/:id", requireRole("ADMIN"), deleteTask);
+router.delete("/:id", requireRole("Admin"), deleteTask);
 
 export default router;

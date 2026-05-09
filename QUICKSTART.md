@@ -32,6 +32,7 @@ npm run setup-db
 ✅ MongoDB setup complete!
 ```
 
+
 ---
 
 ### Option 2: Manual Setup (Copy-Paste in MongoDB Compass)
@@ -76,14 +77,14 @@ npm run seed
 ```
 ✓ MongoDB connected: pk.lkfxvzj.mongodb.net
 ✓ Cleared existing data
-✓ Created 3 users (1 ADMIN, 2 MEMBERS)
+✓ Created 3 users (1 Admin, 2 MemberS)
 ✓ Created 3 projects
 ✓ Created 7 tasks
 
 ✅ Seed data created successfully!
 
 Demo Users:
-  Admin: admin@ethara.ai / password123
+  Admin: Admin@ethara.ai / password123
   Member: john@ethara.ai / password123
   Member: sarah@ethara.ai / password123
 ```
@@ -113,7 +114,7 @@ npm run dev
 
 ### Step 5: Test Application
 1. Open http://localhost:5173
-2. Login with: `admin@ethara.ai` / `password123`
+2. Login with: `Admin@ethara.ai` / `password123`
 3. You should see the Dashboard
 
 ---
@@ -127,7 +128,7 @@ npm run dev
   email: String (unique),
   password: String (hashed),
   name: String,
-  role: "ADMIN" | "MEMBER",
+  role: "Admin" | "Member",
   signup_timestamp: Date,
   last_login: Date,
   created_at: Date,
@@ -142,7 +143,7 @@ npm run dev
   title: String,
   description: String,
   created_by: ObjectId (ref → users._id),
-  members: [
+  Members: [
     {
       user_id: ObjectId (ref → users._id),
       joined_at: Date
@@ -265,7 +266,7 @@ Ethara-AI/
 3. ✅ Run `npm run dev` (from backend/)
 4. ✅ Run `npm run dev` (from frontend/)
 5. ✅ Open http://localhost:5173
-6. ✅ Login with admin@ethara.ai / password123
+6. ✅ Login with Admin@ethara.ai / password123
 
 ---
 

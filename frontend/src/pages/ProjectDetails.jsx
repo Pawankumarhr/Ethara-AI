@@ -18,7 +18,7 @@ const ProjectDetail = () => {
   const { user } = useAuth();
   const [project, setProject] = useState(null);
   const [users, setUsers] = useState([]);
-  const [memberId, setMemberId] = useState("");
+  const [MemberId, setMemberId] = useState("");
   const [taskForm, setTaskForm] = useState(emptyTask);
 
   const fetchProject = async () => {
@@ -36,7 +36,7 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      if (user?.role !== "ADMIN") return;
+      if (user?.role !== "Admin") return;
       try {
         const { data } = await api.get("/auth/users");
         setUsers(data);
@@ -50,15 +50,15 @@ const ProjectDetail = () => {
 
   const addMember = async (e) => {
     e.preventDefault();
-    if (!memberId) return;
+    if (!MemberId) return;
 
     try {
-      await api.post(`/projects/${id}/members`, { userId: Number(memberId) });
+      await api.post(`/projects/${id}/Members`, { userId: Number(MemberId) });
       toast.success("Member added");
       setMemberId("");
       fetchProject();
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to add member");
+      toast.error(error.response?.data?.message || "Failed to add Member");
     }
   };
 
@@ -88,11 +88,11 @@ const ProjectDetail = () => {
         <p className="mt-1 text-sm text-slate-600">{project.description || "No description"}</p>
       </div>
 
-      {user?.role === "ADMIN" && (
+      {user?.role === "Admin" && (
         <div className="grid gap-5 lg:grid-cols-2">
           <form onSubmit={addMember} className="card space-y-3">
             <p className="font-semibold text-slate-900">Add Member</p>
-            <select className="input" value={memberId} onChange={(e) => setMemberId(e.target.value)}>
+            <select className="input" value={MemberId} onChange={(e) => setMemberId(e.target.value)}>
               <option value="">Select user</option>
               {users.map((u) => (
                 <option key={u.id} value={u.id}>{u.name} ({u.email})</option>
@@ -113,7 +113,7 @@ const ProjectDetail = () => {
             <input className="input" type="date" value={taskForm.dueDate} onChange={(e) => setTaskForm((p) => ({ ...p, dueDate: e.target.value }))} />
             <select className="input md:col-span-2" value={taskForm.assignedTo} onChange={(e) => setTaskForm((p) => ({ ...p, assignedTo: e.target.value }))}>
               <option value="">Assign to (optional)</option>
-              {project.members.map((m) => (
+              {project.Members.map((m) => (
                 <option key={m.user.id} value={m.user.id}>{m.user.name}</option>
               ))}
             </select>

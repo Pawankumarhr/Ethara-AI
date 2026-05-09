@@ -10,8 +10,8 @@ const signToken = (user) =>
   );
 
 const normalizeRole = (role) => {
-  const value = String(role || "MEMBER").toUpperCase();
-  return value === "ADMIN" ? "ADMIN" : "MEMBER";
+  const value = String(role || "Member").toUpperCase();
+  return value === "Admin" ? "Admin" : "Member";
 };
 
 export const register = async (req, res) => {

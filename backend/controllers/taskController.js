@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Task, Project } from "../config/db.js";
 
 const canAccessTask = async (task, user) => {
-  if (user.role === "ADMIN") return true;
+  if (user.role === "Admin") return true;
   return task.assigned_to && task.assigned_to.toString() === user.id.toString();
 };
 
@@ -28,8 +28,8 @@ export const createTask = async (req, res) => {
         return res.status(400).json({ message: "Invalid user ID" });
       }
 
-      const memberExists = project.members.some(m => m.user_id.toString() === assignedTo.toString());
-      if (!memberExists) {
+      const MemberExists = project.Members.some(m => m.user_id.toString() === assignedTo.toString());
+      if (!MemberExists) {
         return res.status(400).json({ message: "Assigned user is not in this project" });
       }
     }
@@ -73,7 +73,7 @@ export const getTasks = async (req, res) => {
   try {
     let tasks;
 
-    if (req.user.role === "ADMIN") {
+    if (req.user.role === "Admin") {
       tasks = await Task.find()
         .populate("assigned_to", "id name email role")
         .populate("project_id", "id title")
@@ -127,7 +127,7 @@ export const updateTask = async (req, res) => {
       return res.status(403).json({ message: "Access denied" });
     }
 
-    if (req.user.role === "ADMIN") {
+    if (req.user.role === "Admin") {
       if (req.body.title) task.title = req.body.title;
       if (req.body.description !== undefined) task.description = req.body.description;
       if (req.body.status) task.status = req.body.status;

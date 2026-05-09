@@ -31,14 +31,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"New User\",\n  \"email\": \"newuser@example.com\",\n  \"password\": \"SecurePassword123\",\n  \"role\": \"MEMBER\"\n}"
+              "raw": "{\n  \"name\": \"New User\",\n  \"email\": \"newuser@example.com\",\n  \"password\": \"SecurePassword123\",\n  \"role\": \"Member\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/auth/register",
               "host": ["{{base_url}}"],
               "path": ["auth", "register"]
             },
-            "description": "Register a new user account. Role can be ADMIN or MEMBER (defaults to MEMBER)."
+            "description": "Register a new user account. Role can be Admin or Member (defaults to Member)."
           },
           "response": [
             {
@@ -53,7 +53,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"John Developer\",\n  \"email\": \"john@ethara.ai\",\n  \"password\": \"password123\",\n  \"role\": \"MEMBER\"\n}"
+                  "raw": "{\n  \"name\": \"John Developer\",\n  \"email\": \"john@ethara.ai\",\n  \"password\": \"password123\",\n  \"role\": \"Member\"\n}"
                 },
                 "url": {
                   "raw": "{{base_url}}/auth/register",
@@ -64,7 +64,7 @@
               "status": "Created",
               "code": 201,
               "header": [],
-              "body": "{\n  \"message\": \"User registered successfully\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"John Developer\",\n    \"email\": \"john@ethara.ai\",\n    \"role\": \"MEMBER\"\n  },\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+              "body": "{\n  \"message\": \"User registered successfully\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"John Developer\",\n    \"email\": \"john@ethara.ai\",\n    \"role\": \"Member\"\n  },\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
             }
           ]
         },
@@ -93,7 +93,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"admin@ethara.ai\",\n  \"password\": \"password123\"\n}"
+              "raw": "{\n  \"email\": \"Admin@ethara.ai\",\n  \"password\": \"password123\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/auth/login",
@@ -115,7 +115,7 @@
                 ],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"email\": \"admin@ethara.ai\",\n  \"password\": \"password123\"\n}"
+                  "raw": "{\n  \"email\": \"Admin@ethara.ai\",\n  \"password\": \"password123\"\n}"
                 },
                 "url": {
                   "raw": "{{base_url}}/auth/login",
@@ -126,7 +126,7 @@
               "status": "OK",
               "code": 200,
               "header": [],
-              "body": "{\n  \"message\": \"Login successful\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"admin@ethara.ai\",\n    \"role\": \"ADMIN\"\n  },\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+              "body": "{\n  \"message\": \"Login successful\",\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"Admin@ethara.ai\",\n    \"role\": \"Admin\"\n  },\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
             }
           ]
         },
@@ -146,7 +146,7 @@
               "host": ["{{base_url}}"],
               "path": ["auth", "users"]
             },
-            "description": "Get list of all users. Only accessible by ADMIN users."
+            "description": "Get list of all users. Only accessible by Admin users."
           },
           "response": [
             {
@@ -168,7 +168,7 @@
               "status": "OK",
               "code": 200,
               "header": [],
-              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"admin@ethara.ai\",\n    \"role\": \"ADMIN\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"John Developer\",\n    \"email\": \"john@ethara.ai\",\n    \"role\": \"MEMBER\"\n  }\n]"
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Admin User\",\n    \"email\": \"Admin@ethara.ai\",\n    \"role\": \"Admin\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"John Developer\",\n    \"email\": \"john@ethara.ai\",\n    \"role\": \"Member\"\n  }\n]"
             }
           ]
         }
@@ -194,7 +194,7 @@
               "host": ["{{base_url}}"],
               "path": ["projects"]
             },
-            "description": "Get all projects where the authenticated user is a member or creator."
+            "description": "Get all projects where the authenticated user is a Member or creator."
           },
           "response": [
             {
@@ -236,7 +236,7 @@
               "host": ["{{base_url}}"],
               "path": ["projects", "1"]
             },
-            "description": "Get details of a specific project including its members and tasks."
+            "description": "Get details of a specific project including its Members and tasks."
           },
           "response": [
             {
@@ -258,7 +258,7 @@
               "status": "OK",
               "code": 200,
               "header": [],
-              "body": "{\n  \"id\": 1,\n  \"title\": \"Website Redesign\",\n  \"description\": \"Complete redesign of the company website\",\n  \"createdBy\": 1,\n  \"tasks\": [\n    {\n      \"id\": 1,\n      \"title\": \"Design UI Mockups\",\n      \"status\": \"COMPLETED\",\n      \"priority\": \"HIGH\"\n    }\n  ],\n  \"members\": [\n    {\n      \"id\": 1,\n      \"name\": \"Admin User\",\n      \"email\": \"admin@ethara.ai\"\n    }\n  ],\n  \"createdAt\": \"2026-05-09T10:00:00Z\",\n  \"updatedAt\": \"2026-05-09T10:00:00Z\"\n}"
+              "body": "{\n  \"id\": 1,\n  \"title\": \"Website Redesign\",\n  \"description\": \"Complete redesign of the company website\",\n  \"createdBy\": 1,\n  \"tasks\": [\n    {\n      \"id\": 1,\n      \"title\": \"Design UI Mockups\",\n      \"status\": \"COMPLETED\",\n      \"priority\": \"HIGH\"\n    }\n  ],\n  \"Members\": [\n    {\n      \"id\": 1,\n      \"name\": \"Admin User\",\n      \"email\": \"Admin@ethara.ai\"\n    }\n  ],\n  \"createdAt\": \"2026-05-09T10:00:00Z\",\n  \"updatedAt\": \"2026-05-09T10:00:00Z\"\n}"
             }
           ]
         },
@@ -286,7 +286,7 @@
               "host": ["{{base_url}}"],
               "path": ["projects"]
             },
-            "description": "Create a new project. Only ADMIN users can create projects."
+            "description": "Create a new project. Only Admin users can create projects."
           },
           "response": [
             {
@@ -344,7 +344,7 @@
               "host": ["{{base_url}}"],
               "path": ["projects", "1"]
             },
-            "description": "Update an existing project. Only the creator (admin) can update."
+            "description": "Update an existing project. Only the creator (Admin) can update."
           },
           "response": [
             {
@@ -394,7 +394,7 @@
               "host": ["{{base_url}}"],
               "path": ["projects", "1"]
             },
-            "description": "Delete a project. Only the creator (admin) can delete."
+            "description": "Delete a project. Only the creator (Admin) can delete."
           },
           "response": [
             {
@@ -440,11 +440,11 @@
               "raw": "{\n  \"userId\": 2\n}"
             },
             "url": {
-              "raw": "{{base_url}}/projects/1/members",
+              "raw": "{{base_url}}/projects/1/Members",
               "host": ["{{base_url}}"],
-              "path": ["projects", "1", "members"]
+              "path": ["projects", "1", "Members"]
             },
-            "description": "Add a member to a project. Only ADMIN users can add members."
+            "description": "Add a Member to a project. Only Admin users can add Members."
           },
           "response": [
             {
@@ -466,9 +466,9 @@
                   "raw": "{\n  \"userId\": 2\n}"
                 },
                 "url": {
-                  "raw": "{{base_url}}/projects/1/members",
+                  "raw": "{{base_url}}/projects/1/Members",
                   "host": ["{{base_url}}"],
-                  "path": ["projects", "1", "members"]
+                  "path": ["projects", "1", "Members"]
                 }
               },
               "status": "Created",
@@ -550,7 +550,7 @@
               "host": ["{{base_url}}"],
               "path": ["tasks"]
             },
-            "description": "Create a new task. Only ADMIN users can create tasks. assignedTo and dueDate are optional."
+            "description": "Create a new task. Only Admin users can create tasks. assignedTo and dueDate are optional."
           },
           "response": [
             {
@@ -608,7 +608,7 @@
               "host": ["{{base_url}}"],
               "path": ["tasks", "1"]
             },
-            "description": "Update a task. Members can update status, admins can update all fields."
+            "description": "Update a task. Members can update status, Admins can update all fields."
           },
           "response": [
             {
@@ -658,7 +658,7 @@
               "host": ["{{base_url}}"],
               "path": ["tasks", "1"]
             },
-            "description": "Delete a task. Only ADMIN users can delete tasks."
+            "description": "Delete a task. Only Admin users can delete tasks."
           },
           "response": [
             {

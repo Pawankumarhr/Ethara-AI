@@ -52,7 +52,7 @@ const Projects = () => {
 
   return (
     <div className="space-y-5">
-      {user?.role === "ADMIN" && (
+      {user?.role === "Admin" && (
         <form onSubmit={handleCreate} className="card grid gap-3 md:grid-cols-3">
           <input
             className="input"
@@ -77,7 +77,7 @@ const Projects = () => {
             key={project.id}
             project={project}
             onDelete={handleDelete}
-            canDelete={user?.role === "ADMIN"}
+            canDelete={user?.role === "Admin"}
           />
         ))}
 

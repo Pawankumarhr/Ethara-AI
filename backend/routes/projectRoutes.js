@@ -14,11 +14,11 @@ const router = express.Router();
 
 router.use(protect);
 
-router.post("/", requireRole("ADMIN"), createProject);
+router.post("/", requireRole("Admin"), createProject);
 router.get("/", getProjects);
 router.get("/:id", getProjectById);
-router.put("/:id", requireRole("ADMIN"), updateProject);
-router.delete("/:id", requireRole("ADMIN"), deleteProject);
-router.post("/:id/members", requireRole("ADMIN"), addProjectMember);
+router.put("/:id", requireRole("Admin"), updateProject);
+router.delete("/:id", requireRole("Admin"), deleteProject);
+router.post("/:id/Members", requireRole("Admin"), addProjectMember);
 
 export default router;
