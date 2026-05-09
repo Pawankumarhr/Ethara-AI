@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['ADMIN', 'MEMBER'],
-    default: 'MEMBER',
+    enum: ['Admin', 'Member'],
+    default: 'Member',
   },
   signup_timestamp: {
     type: Date,
