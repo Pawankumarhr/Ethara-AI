@@ -19,6 +19,6 @@ router.get("/", getProjects);
 router.get("/:id", getProjectById);
 router.put("/:id", requireRole("Admin"), updateProject);
 router.delete("/:id", requireRole("Admin"), deleteProject);
-router.post("/:id/Members", requireRole("Admin"), addProjectMember);
+router.post("/:id/members", requireRole("Admin"), addProjectMember);
 
 export default router;

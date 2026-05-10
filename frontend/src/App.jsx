@@ -8,6 +8,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 import Projects from "./pages/Projects";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
+import TeamMembers from "./pages/TeamMembers";
 
 const ProtectedRoute = ({ children, roles }) => {
   const { user, isAuthenticated } = useAuth();
@@ -77,6 +78,15 @@ const App = () => {
         element={
           <ProtectedPage>
             <Tasks />
+          </ProtectedPage>
+        }
+      />
+
+      <Route
+        path="/team"
+        element={
+          <ProtectedPage roles={["Admin"]}>
+            <TeamMembers />
           </ProtectedPage>
         }
       />

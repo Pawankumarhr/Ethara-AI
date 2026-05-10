@@ -19,7 +19,7 @@ async function seedDatabase() {
     const MemberPassword = await bcryptjs.hash('password123', 10);
 
     const AdminUser = await User.create({
-      email: 'Admin@ethara.ai',
+      email: 'admin@ethara.ai',
       password: AdminPassword,
       name: 'Admin User',
       role: 'Admin',

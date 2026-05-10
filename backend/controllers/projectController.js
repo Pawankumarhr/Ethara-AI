@@ -12,7 +12,7 @@ const canAccessProject = async (projectId, user) => {
 
 export const createProject = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, deadline } = req.body;
 
     if (!title) {
       return res.status(400).json({ message: "Project title is required" });
@@ -21,6 +21,7 @@ export const createProject = async (req, res) => {
     const project = await Project.create({
       title,
       description,
+      deadline: deadline ? new Date(deadline) : null,
       created_by: req.user.id,
       Members: [{ user_id: req.user.id }],
     });
@@ -34,6 +35,7 @@ export const createProject = async (req, res) => {
       id: populated._id,
       title: populated.title,
       description: populated.description,
+      deadline: populated.deadline,
       created_by: populated.created_by._id,
       creator: populated.created_by,
       Members: populated.Members,
@@ -111,6 +113,7 @@ export const getProjects = async (req, res) => {
       id: p._id,
       title: p.title,
       description: p.description,
+      deadline: p.deadline,
       created_by: p.created_by._id,
       creator: p.created_by,
       Members: p.Members,
@@ -151,6 +154,7 @@ export const getProjectById = async (req, res) => {
       id: project._id,
       title: project.title,
       description: project.description,
+      deadline: project.deadline,
       created_by: project.created_by._id,
       creator: project.created_by,
       Members: project.Members,
@@ -166,7 +170,7 @@ export const getProjectById = async (req, res) => {
 export const updateProject = async (req, res) => {
   try {
     const projectId = req.params.id;
-    const { title, description } = req.body;
+    const { title, description, deadline } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(projectId)) {
       return res.status(400).json({ message: "Invalid project ID" });
@@ -179,6 +183,7 @@ export const updateProject = async (req, res) => {
 
     if (title) project.title = title;
     if (description !== undefined) project.description = description;
+    if (deadline !== undefined) project.deadline = deadline ? new Date(deadline) : null;
 
     await project.save();
 
@@ -186,6 +191,7 @@ export const updateProject = async (req, res) => {
       id: project._id,
       title: project.title,
       description: project.description,
+      deadline: project.deadline,
       created_at: project.created_at,
       updated_at: project.updated_at,
     });
