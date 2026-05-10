@@ -18,6 +18,7 @@ export async function connectDB() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    
     console.log(`✓ MongoDB connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
