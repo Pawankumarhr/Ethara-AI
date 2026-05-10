@@ -2,7 +2,7 @@
   "name": "Ethara AI - Team Task Manager",
   "description": "Full-stack team collaboration and task management application",
   "builder": "nixpacks",
-  "buildCommand": "cd backend && npm install && npm run build",
+  "buildCommand": "cd frontend && npm install && npm run build && cd ../backend && npm install",
   "startCommand": "cd backend && npm start",
   "env": {
     "NODE_ENV": {
@@ -13,8 +13,8 @@
       "description": "Server port",
       "value": "3000"
     },
-    "DATABASE_URL": {
-      "description": "Supabase PostgreSQL connection string. Get from: https://supabase.com → Project Settings → Database",
+    "MONGODB_URI": {
+      "description": "MongoDB Atlas connection string. Example: mongodb+srv://username:password@cluster.mongodb.net/dbname",
       "required": true
     },
     "JWT_SECRET": {
@@ -22,7 +22,7 @@
       "required": true
     },
     "CORS_ORIGIN": {
-      "description": "CORS origin (your Railway app URL). Example: https://ethara-ai-prod.railway.app",
+      "description": "CORS origin (your Railway app URL). Will be set automatically by Railway",
       "required": false,
       "value": "*"
     }

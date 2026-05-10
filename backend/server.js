@@ -91,10 +91,24 @@ app.get("/api/dashboard", protect, async (req, res) => {
   }
 });
 
-// Root route for Railway backend
+// Serve frontend static files (for production on Railway)
+const frontendDistPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendDistPath));
+
+// Root route for checking if server is running
 app.get("/", (req, res) => {
   res.json({
     message: "Ethara AI Backend Running Successfully",
+  });
+});
+
+// SPA fallback: serve index.html for all non-API routes (using regex for Express 5)
+app.get(/^(?!\/api)/, (req, res) => {
+  // Serve index.html for all non-API routes (frontend SPA)
+  res.sendFile(path.join(frontendDistPath, "index.html"), (err) => {
+    if (err) {
+      res.status(500).json({ message: "Error loading application" });
+    }
   });
 });
 

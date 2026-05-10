@@ -2,7 +2,14 @@ import mongoose from 'mongoose';
 
 export async function connectDB() {
   try {
-    const conn = await mongoose.connect(process.env.DATABASE_URL, {
+    // Support both MONGODB_URI (Railway) and DATABASE_URL (legacy)
+    const mongoUri = process.env.MONGODB_URI || process.env.DATABASE_URL;
+    
+    if (!mongoUri) {
+      throw new Error('MONGODB_URI or DATABASE_URL environment variable is not set');
+    }
+
+    const conn = await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
