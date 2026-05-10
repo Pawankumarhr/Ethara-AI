@@ -42,14 +42,22 @@ const Dashboard = () => {
   const fetchDashboard = async () => {
     try {
       setLoading(true);
-      const [dashboardRes, projectsRes, membersRes] = await Promise.all([
+      
+      // Fetch dashboard stats and projects (required)
+      const [dashboardRes, projectsRes] = await Promise.all([
         api.get("/dashboard"),
         api.get("/projects"),
-        api.get("/users"),
       ]);
       setData(dashboardRes.data);
       setProjects(projectsRes.data || []);
-      setMembers(membersRes.data?.data || []);
+      
+      // Fetch members (optional, admin only)
+      try {
+        const membersRes = await api.get("/users");
+        setMembers(membersRes.data?.data || []);
+      } catch {
+        setMembers([]);
+      }
     } catch (error) {
       toast.error("Failed to load dashboard");
     } finally {
