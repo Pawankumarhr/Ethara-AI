@@ -16,6 +16,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Diagnostic logging
+console.log("=== Environment Configuration ===");
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`PORT: ${PORT}`);
+console.log(`MONGODB_URI: ${process.env.MONGODB_URI ? "✓ Set" : "❌ NOT SET"}`);
+console.log(`DATABASE_URL: ${process.env.DATABASE_URL ? "✓ Set" : "❌ NOT SET"}`);
+console.log(`JWT_SECRET: ${process.env.JWT_SECRET ? "✓ Set" : "❌ NOT SET"}`);
+console.log(`CORS_ORIGIN: ${process.env.CORS_ORIGIN || "* (default)"}`);
+console.log("==================================\n");
+
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN || "http://localhost:5173",

@@ -6,9 +6,14 @@ export async function connectDB() {
     const mongoUri = process.env.MONGODB_URI || process.env.DATABASE_URL;
     
     if (!mongoUri) {
-      throw new Error('MONGODB_URI or DATABASE_URL environment variable is not set');
+      throw new Error(
+        'MongoDB connection string not found!\n' +
+        'Set either MONGODB_URI or DATABASE_URL environment variable.\n' +
+        'Example: mongodb+srv://username:password@cluster.mongodb.net/dbname'
+      );
     }
 
+    console.log("Attempting MongoDB connection...");
     const conn = await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -16,7 +21,10 @@ export async function connectDB() {
     console.log(`✓ MongoDB connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
-    console.error('❌ MongoDB connection failed:', error.message);
+    console.error('❌ MongoDB connection failed!');
+    console.error('Error:', error.message);
+    console.error('\n⚠️  Application cannot start without MongoDB connection.');
+    console.error('Please check your MONGODB_URI or DATABASE_URL environment variable.');
     process.exit(1);
   }
 }
