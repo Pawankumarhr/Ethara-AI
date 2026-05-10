@@ -70,6 +70,7 @@ app.get("/api/dashboard", protect, async (req, res) => {
       id: t._id,
       title: t.title,
       status: t.status,
+      assigned_to: t.assigned_to,
       assignee: t.assigned_to,
       project: t.project_id,
     }));
@@ -85,6 +86,7 @@ app.get("/api/dashboard", protect, async (req, res) => {
       recentTasks: formattedTasks,
     });
   } catch (error) {
+    console.error("Dashboard error:", error.message);
     return res.status(500).json({ message: "Failed to fetch dashboard" });
   }
 });

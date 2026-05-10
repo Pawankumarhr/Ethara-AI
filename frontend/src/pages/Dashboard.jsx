@@ -198,7 +198,7 @@ const Dashboard = () => {
       </div>
 
       {/* Admin Actions Panel */}
-      {user?.role === "Admin" && (
+      {user?.role === "ADMIN" && (
         <div className="grid gap-4 sm:grid-cols-3">
           <button
             onClick={() => setShowProjectModal(true)}

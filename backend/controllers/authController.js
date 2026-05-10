@@ -10,8 +10,9 @@ const signToken = (user) =>
   );
 
 const normalizeRole = (role) => {
-  const value = String(role || "Member").toUpperCase();
-  return value === "Admin" ? "Admin" : "Member";
+  const value = String(role || "Member").toLowerCase();
+  if (value === "admin") return "Admin";
+  return "Member";
 };
 
 export const register = async (req, res) => {
@@ -22,27 +23,35 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "Name, email and password are required" });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
+      console.error(`Registration error: Email already registered - ${email}`);
       return res.status(400).json({ message: "Email already registered" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const normalizedRole = normalizeRole(role);
+    
     const user = await User.create({
       name,
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
-      role: normalizeRole(role),
+      role: normalizedRole,
     });
 
     const token = signToken(user);
 
     return res.status(201).json({
+      success: true,
       token,
       user: { id: user._id, name: user.name, email: user.email, role: user.role },
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to register user" });
+    console.error("Registration error:", error.message);
+    if (error.code === 11000) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+    return res.status(500).json({ message: "Failed to register user", error: error.message });
   }
 };
 
@@ -72,7 +81,8 @@ export const login = async (req, res) => {
       user: { id: user._id, name: user.name, email: user.email, role: user.role },
     });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to login" });
+    console.error("Login error:", error.message);
+    return res.status(500).json({ message: "Failed to login", error: error.message });
   }
 };
 
